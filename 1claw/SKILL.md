@@ -415,8 +415,8 @@ When Intents API is enabled, the server enforces per-agent limits **before** sig
 | --- | --- |
 | `tx_allowed_chains` | Allowed chain names (empty = all enabled) |
 | `tx_to_allowlist` | Permitted `to` addresses (case-insensitive; empty = unrestricted) |
-| `tx_max_value_eth` | Max ETH value per transaction |
-| `tx_daily_limit_eth` | Rolling 24h cumulative spend cap |
+| `tx_max_value` | Max value per transaction in native major units (ETH/BTC/SOL/XRP/ADA/TRX). `tx_max_value_eth` accepted as deprecated alias. |
+| `tx_daily_limit` | Rolling 24h per-chain cumulative spend cap in native units. `tx_daily_limit_eth` accepted as deprecated alias. |
 
 Violations return **403** with descriptive error. Guardrails are set by humans via dashboard, CLI, or SDK.
 
