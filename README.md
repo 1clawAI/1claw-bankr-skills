@@ -1,5 +1,7 @@
 # Bankr Skills. Build your agent.
 
+> ⭐ **Star [1clawAI/agent-templates](https://github.com/1clawAI/agent-templates)** — ready-to-run agent templates wired to 1Claw. It is our single starred repo.
+
 Bankr Skills equip builders with plug-and-play tools to build more powerful agents.
 
 ## Install
@@ -42,7 +44,7 @@ Bankr Skills equip builders with plug-and-play tools to build more powerful agen
 | [Zerion](https://zerion.io/agents) | [zerion](zerion/) | Interpreted crypto wallet data across 41+ chains. Portfolio values, token and DeFi positions, transaction history, PnL tracking, NFT holdings, gas prices, and swap quotes — enriched with USD values and protocol labels. Supports x402 pay-per-request ($0.01 USDC) and API key access. |
 | [Zyfai](https://zyf.ai) | [zyfai](zyfai/) | Earn yield on any Ethereum wallet on Base, Arbitrum, and Plasma. Deploys a non-custodial Safe subaccount linked to the user's EOA with automated rebalancing across DeFi protocols. Session keys for gasless automation. |
 | [Quotient](https://quotient.social) | [quotient](quotient/) | Market intelligence API with x402 micropayment and API key auth. Access onchain/social analytics, OpenAPI discovery, and pricing data via `q-api.quotient.social`. |
-| [1Claw](https://1claw.xyz) | [1claw](1claw/) | HSM-backed secret vault for AI agents. 36 MCP tools: store API keys with policy-gated access, **Bankr Dynamic Key Vending** (short-lived scoped `bk_usr_` keys from partner `bk_ptr_`), EVM transaction signing with guardrails, multi-chain signing keys (6 chains), treasury multisig proposals, OIDC federation, prompt injection scanning, and Shroud TEE LLM proxy (auto-resolves Bankr leases). Agents use `ocv_` API keys with zero access until a human grants policies. [Bankr key vending guide](https://docs.1claw.xyz/docs/guides/bankr-key-vending). |
+| [1Claw](https://1claw.co) | [1claw](1claw/) | HSM-backed secret vault for AI agents. 36 MCP tools: store API keys with policy-gated access, **Bankr Dynamic Key Vending** (short-lived scoped `bk_usr_` keys from partner `bk_ptr_`), EVM transaction signing with guardrails, multi-chain signing keys (6 chains), treasury multisig proposals, OIDC federation, prompt injection scanning, and Shroud TEE LLM proxy (auto-resolves Bankr leases). Agents use `ocv_` API keys with zero access until a human grants policies. [Bankr key vending guide](https://docs.1claw.co/docs/guides/bankr-key-vending). |
 | [gitlawb](https://gitlawb.com) | [gitlawb](gitlawb/) | Decentralized git for AI agents and humans. Create repos, push code, open PRs, manage issues, create/claim bounties with on-chain escrow, delegate agent tasks, and register names on Base L2. Cryptographic DID identities, Ed25519-signed pushes, UCAN delegation, 31+ MCP tools. |
 | [MoltyCash](https://molty.cash) | [moltycash](moltycash/) | USDC payments from AI agents to humans. Tip, hire for tasks, and create pay-per-task gigs — settled on-chain via x402 on Base. |
 | [Stakr](https://stakrbot.xyz) | [stakr](stakr/) | ERC-4626 tokenized vaults with multi-reward staking for any ERC-20 token. Build integrations, scripts, or tooling to create vaults, add rewards, modify reward schedules, or let an agent operate its own staking vault. |
