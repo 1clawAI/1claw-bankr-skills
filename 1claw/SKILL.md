@@ -16,7 +16,7 @@ metadata:
     "clawdbot":
       {
         "emoji": "🔐",
-        "homepage": "https://1claw.xyz",
+        "homepage": "https://1claw.co",
         "requires": { "env": ["ONECLAW_AGENT_API_KEY"] },
       },
   }
@@ -28,10 +28,10 @@ metadata:
 
 | Resource | URL |
 | --- | --- |
-| API | `https://api.1claw.xyz` |
-| Dashboard | `https://1claw.xyz` |
+| API | `https://api.1claw.co` |
+| Dashboard | `https://1claw.co` |
 | Docs | `https://docs.1claw.xyz` |
-| Shroud (TEE LLM + signing) | `https://shroud.1claw.xyz` |
+| Shroud (TEE LLM + signing) | `https://shroud.1claw.co` |
 | OpenAPI spec | `@1claw/openapi-spec` on npm |
 | Canonical skill (full) | `https://github.com/1clawAI/1claw-skill` |
 
@@ -103,7 +103,7 @@ metadata:
 ### Self-enrollment (no credentials yet)
 
 ```bash
-curl -s -X POST https://api.1claw.xyz/v1/agents/enroll \
+curl -s -X POST https://api.1claw.co/v1/agents/enroll \
   -H "Content-Type: application/json" \
   -d '{"name":"my-bankr-agent","human_email":"human@example.com","description":"Bankr trading agent with vault-backed key management"}'
 ```
@@ -138,12 +138,12 @@ Optional overrides:
 | --- | --- |
 | `ONECLAW_AGENT_ID` | Agent UUID if you want to pin identity (usually auto-discovered) |
 | `ONECLAW_VAULT_ID` | Vault UUID when the agent can access multiple vaults |
-| `ONECLAW_BASE_URL` | Self-hosted API — **only** `https://api.1claw.xyz` or `https://shroud.1claw.xyz` accepted by default; custom hosts require `--allow-custom-base-url` flag on the validation script (see below) |
+| `ONECLAW_BASE_URL` | Self-hosted API — **only** `https://api.1claw.co` or `https://shroud.1claw.co` accepted by default; custom hosts require `--allow-custom-base-url` flag on the validation script (see below) |
 | `ONECLAW_LOCAL_ONLY` | `true` — security tools only (`inspect_content`), no vault |
 
-> **Base URL safety:** The setup script and MCP server default to `https://api.1claw.xyz`. Only HTTPS is accepted. If `ONECLAW_BASE_URL` is set to an untrusted host, your API key will be sent there. The validation script rejects non-HTTPS URLs and unknown hosts unless you explicitly pass `--allow-custom-base-url` (for self-hosted or development instances).
+> **Base URL safety:** The setup script and MCP server default to `https://api.1claw.co`. Only HTTPS is accepted. If `ONECLAW_BASE_URL` is set to an untrusted host, your API key will be sent there. The validation script rejects non-HTTPS URLs and unknown hosts unless you explicitly pass `--allow-custom-base-url` (for self-hosted or development instances).
 
-**Do not** configure IDE MCP with a static Bearer JWT against `https://mcp.1claw.xyz` — tokens expire in ~1 hour. Stdio + `ocv_` key is the supported long-running pattern.
+**Do not** configure IDE MCP with a static Bearer JWT against `https://mcp.1claw.co` — tokens expire in ~1 hour. Stdio + `ocv_` key is the supported long-running pattern.
 
 ### Security-only mode (no credentials needed)
 
@@ -171,7 +171,7 @@ Run the MCP server with `ONECLAW_LOCAL_ONLY=true` to get the `inspect_content` t
 
 The script enforces:
 - **HTTPS required** — rejects `http://` URLs (credentials would be cleartext)
-- **Trusted hosts only** — only `https://api.1claw.xyz` and `https://shroud.1claw.xyz` accepted by default
+- **Trusted hosts only** — only `https://api.1claw.co` and `https://shroud.1claw.co` accepted by default
 - **Explicit override for custom hosts** — pass `--allow-custom-base-url` for self-hosted/dev instances (shows a warning)
 
 ```bash
@@ -308,11 +308,11 @@ Signing key resolves automatically from the agent's provisioned chain key. Guard
 ### REST: Token exchange
 
 ```bash
-TOKEN=$(curl -s -X POST https://api.1claw.xyz/v1/auth/agent-token \
+TOKEN=$(curl -s -X POST https://api.1claw.co/v1/auth/agent-token \
   -H "Content-Type: application/json" \
   -d '{"api_key":"ocv_..."}' | jq -r '.access_token')
 
-curl -s -X PUT "https://api.1claw.xyz/v1/vaults/${VAULT_ID}/secrets/keys/bankr-api-key" \
+curl -s -X PUT "https://api.1claw.co/v1/vaults/${VAULT_ID}/secrets/keys/bankr-api-key" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Content-Type: application/json" \
   -d '{"value":"bk_...","type":"api_key"}'
@@ -420,7 +420,7 @@ When Intents API is enabled, the server enforces per-agent limits **before** sig
 
 Violations return **403** with descriptive error. Guardrails are set by humans via dashboard, CLI, or SDK.
 
-For TEE-grade signing isolation, point `ONECLAW_BASE_URL` at Shroud (`https://shroud.1claw.xyz`) — this is a trusted 1Claw host and does not require `--allow-custom-base-url`.
+For TEE-grade signing isolation, point `ONECLAW_BASE_URL` at Shroud (`https://shroud.1claw.co`) — this is a trusted 1Claw host and does not require `--allow-custom-base-url`.
 
 ---
 
@@ -429,22 +429,22 @@ For TEE-grade signing isolation, point `ONECLAW_BASE_URL` at Shroud (`https://sh
 1claw is a JWKS-published OIDC issuer. Agents can exchange their 1claw JWT for an RS256 token with a caller-specified `audience` — then use that token to authenticate with external services that trust 1claw's JWKS (e.g., Anthropic Workload Identity Federation, GCP/AWS STS).
 
 **No static API keys stored on the relying party.** The federation token:
-- Is RS256-signed (standard OIDC), verifiable via `https://api.1claw.xyz/.well-known/jwks.json`
+- Is RS256-signed (standard OIDC), verifiable via `https://api.1claw.co/.well-known/jwks.json`
 - Has configurable TTL (60s–3600s, default 15 min)
 - Includes the agent's identity (`sub: "agent:<uuid>"`) and scopes
 - Requires `federation_enabled: true` + audience allowlist on the agent
 
 ```bash
 # Exchange agent token for federation token
-curl -s -X POST https://api.1claw.xyz/v1/auth/federated-token \
+curl -s -X POST https://api.1claw.co/v1/auth/federated-token \
   -H "Authorization: Bearer ${AGENT_JWT}" \
   -H "Content-Type: application/json" \
   -d '{"grant_type":"urn:ietf:params:oauth:grant-type:token-exchange","subject_token_type":"urn:ietf:params:oauth:token-type:jwt","audience":"https://api.anthropic.com"}'
 ```
 
 Discovery endpoints (public, no auth):
-- `GET https://api.1claw.xyz/.well-known/openid-configuration`
-- `GET https://api.1claw.xyz/.well-known/jwks.json`
+- `GET https://api.1claw.co/.well-known/openid-configuration`
+- `GET https://api.1claw.co/.well-known/jwks.json`
 
 ---
 
@@ -454,7 +454,7 @@ Shroud is **not** the MCP server. It is a separate TEE service for:
 1. **Inspected LLM traffic** — PII redaction, injection detection, secret leak prevention, per-agent policy enforcement
 2. **Confidential transaction signing** — private keys live only in AMD SEV-SNP memory
 
-Agents call `https://shroud.1claw.xyz` directly with headers:
+Agents call `https://shroud.1claw.co` directly with headers:
 - `X-Shroud-Agent-Key: ocv_...` (or `Authorization: Bearer <jwt>`)
 - `X-Shroud-Provider: openai` (required — specifies upstream LLM provider)
 
@@ -526,7 +526,7 @@ npm install -g @1claw/cli@0.32.1
 TypeScript SDK (`@1claw/sdk`):
 ```typescript
 import { OneclawClient } from "@1claw/sdk";
-const client = new OneclawClient({ baseUrl: "https://api.1claw.xyz", apiKey: "ocv_..." });
+const client = new OneclawClient({ baseUrl: "https://api.1claw.co", apiKey: "ocv_..." });
 await client.secrets.put("keys/bankr-api-key", { value: "bk_...", type: "api_key" });
 const secret = await client.secrets.get("keys/bankr-api-key");
 ```
