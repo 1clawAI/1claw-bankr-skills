@@ -13,7 +13,7 @@
 The `agent_id` field is **optional** — the server resolves the agent by the first 12 characters of the API key (prefix lookup).
 
 ```bash
-curl -s -X POST https://api.1claw.xyz/v1/auth/agent-token \
+curl -s -X POST https://api.1claw.co/v1/auth/agent-token \
   -H "Content-Type: application/json" \
   -d '{"api_key":"ocv_..."}'
 ```
@@ -37,7 +37,7 @@ Response:
 ### OIDC federation token (RS256, for external services)
 
 ```bash
-curl -s -X POST https://api.1claw.xyz/v1/auth/federated-token \
+curl -s -X POST https://api.1claw.co/v1/auth/federated-token \
   -H "Authorization: Bearer ${AGENT_JWT}" \
   -H "Content-Type: application/json" \
   -d '{
@@ -49,13 +49,13 @@ curl -s -X POST https://api.1claw.xyz/v1/auth/federated-token \
 
 Response: `{ "access_token": "<rs256-jwt>", "issued_token_type": "...", "token_type": "bearer", "expires_in": 900 }`
 
-Discovery: `GET https://api.1claw.xyz/.well-known/openid-configuration` / `GET .../jwks.json`
+Discovery: `GET https://api.1claw.co/.well-known/openid-configuration` / `GET .../jwks.json`
 
 ## Health checks (no auth)
 
 ```bash
-curl -s https://api.1claw.xyz/v1/health        # API + DB connectivity
-curl -s https://api.1claw.xyz/v1/health/hsm     # HSM (KMS) availability
+curl -s https://api.1claw.co/v1/health        # API + DB connectivity
+curl -s https://api.1claw.co/v1/health/hsm     # HSM (KMS) availability
 ```
 
 ## Secret paths
@@ -72,7 +72,7 @@ curl -s https://api.1claw.xyz/v1/health/hsm     # HSM (KMS) availability
 | `ONECLAW_AGENT_API_KEY` | Yes* | Auto token exchange + refresh |
 | `ONECLAW_AGENT_ID` | No | Optional pin (usually auto-discovered) |
 | `ONECLAW_VAULT_ID` | No | Pin vault when agent has multiple |
-| `ONECLAW_BASE_URL` | No | Default `https://api.1claw.xyz` |
+| `ONECLAW_BASE_URL` | No | Default `https://api.1claw.co` |
 | `ONECLAW_LOCAL_ONLY` | No | `true` = `inspect_content` only (free) |
 | `ONECLAW_MCP_EXFIL_PROTECTION` | No | `block` (default) / `warn` / `off` |
 
@@ -142,8 +142,8 @@ Guide: https://docs.1claw.xyz/docs/guides/bankr-key-vending
 
 ## Links
 
-- Dashboard: https://1claw.xyz
+- Dashboard: https://1claw.co
 - Docs: https://docs.1claw.xyz
-- For AI overview: https://1claw.xyz/for-ai
+- For AI overview: https://1claw.co/for-ai
 - Full skill (1300+ lines): https://github.com/1clawAI/1claw-skill/blob/main/SKILL.md
 - npm: https://www.npmjs.com/package/@1claw/mcp

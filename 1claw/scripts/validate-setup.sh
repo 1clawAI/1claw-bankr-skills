@@ -9,15 +9,15 @@
 # Security:
 #   - Only HTTPS URLs are accepted (HTTP is rejected).
 #   - Only known trusted 1Claw hosts are allowed by default:
-#       https://api.1claw.xyz
-#       https://shroud.1claw.xyz
+#       https://api.1claw.co
+#       https://shroud.1claw.co
 #   - Custom hosts require the explicit --allow-custom-base-url flag.
 #   - This prevents accidental credential leakage to untrusted endpoints.
 set -euo pipefail
 
 TRUSTED_HOSTS=(
-  "https://api.1claw.xyz"
-  "https://shroud.1claw.xyz"
+  "https://api.1claw.co"
+  "https://shroud.1claw.co"
 )
 
 ALLOW_CUSTOM=false
@@ -27,7 +27,7 @@ for arg in "$@"; do
   esac
 done
 
-BASE_URL="${ONECLAW_BASE_URL:-https://api.1claw.xyz}"
+BASE_URL="${ONECLAW_BASE_URL:-https://api.1claw.co}"
 API_KEY="${ONECLAW_AGENT_API_KEY:-}"
 
 pass() { printf 'OK   %s\n' "$1"; }
