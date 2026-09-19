@@ -129,7 +129,7 @@ MCP: `lease_bankr_key`. CLI: `1claw agent bankr-key lease|list|revoke`. Shroud a
 
 Legacy fallback: static key at `providers/bankr/api-key` or `keys/bankr-api-key`.
 
-Guide: https://docs.1claw.xyz/docs/guides/bankr-key-vending
+Guide: https://docs.1claw.co/docs/guides/bankr-key-vending
 
 ## Packages
 
@@ -143,7 +143,7 @@ Guide: https://docs.1claw.xyz/docs/guides/bankr-key-vending
 ## Links
 
 - Dashboard: https://1claw.co
-- Docs: https://docs.1claw.xyz
+- Docs: https://docs.1claw.co
 - For AI overview: https://1claw.co/for-ai
 - Full skill (1300+ lines): https://github.com/1clawAI/1claw-skill/blob/main/SKILL.md
 - npm: https://www.npmjs.com/package/@1claw/mcp

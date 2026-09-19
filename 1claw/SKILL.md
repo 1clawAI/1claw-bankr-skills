@@ -30,7 +30,7 @@ metadata:
 | --- | --- |
 | API | `https://api.1claw.co` |
 | Dashboard | `https://1claw.co` |
-| Docs | `https://docs.1claw.xyz` |
+| Docs | `https://docs.1claw.co` |
 | Shroud (TEE LLM + signing) | `https://shroud.1claw.co` |
 | OpenAPI spec | `@1claw/openapi-spec` on npm |
 | Canonical skill (full) | `https://github.com/1clawAI/1claw-skill` |
@@ -55,13 +55,13 @@ metadata:
 - **Secret versioning and rotation** — every write creates a new version; server-generated rotation with configurable charset
 - **Webhooks** — subscribe to wallet, proposal, transaction, policy, and signing key events
 
-**Pair with Bankr (recommended — Dynamic Key Vending):** Org owners/admins add their `bk_ptr_` partner key under **Settings → Bankr** (`PUT /v1/org/bankr-config`). Agents lease short-lived, scoped `bk_usr_` keys via `lease_bankr_key` (MCP), `1claw agent bankr-key lease`, or the dashboard — no manual `put_secret` / rotation. Shroud auto-resolves leased keys for `X-Shroud-Provider: bankr`. See [Bankr Key Vending guide](https://docs.1claw.xyz/docs/guides/bankr-key-vending).
+**Pair with Bankr (recommended — Dynamic Key Vending):** Org owners/admins add their `bk_ptr_` partner key under **Settings → Bankr** (`PUT /v1/org/bankr-config`). Agents lease short-lived, scoped `bk_usr_` keys via `lease_bankr_key` (MCP), `1claw agent bankr-key lease`, or the dashboard — no manual `put_secret` / rotation. Shroud auto-resolves leased keys for `X-Shroud-Provider: bankr`. See [Bankr Key Vending guide](https://docs.1claw.co/docs/guides/bankr-key-vending).
 
 **Deployment fallback (operators only — tenant isolation):**
 
 | Environment | Guidance |
 | --- | --- |
-| **Multi-tenant SaaS** (`api.1claw.xyz`) | Do **not** set `BANKR_PARTNER_KEY`. Every org must configure BYOK. Fallback is off by default. |
+| **Multi-tenant SaaS** (`api.1claw.co`) | Do **not** set `BANKR_PARTNER_KEY`. Every org must configure BYOK. Fallback is off by default. |
 | **Self-hosted** | `BANKR_PARTNER_KEY` is optional — only when all orgs intentionally share one Bankr partner account. |
 
 - **Precedence:** Org BYOK always wins when configured (`org_byok`); deployment key is used only when an org has no BYOK (`platform_fallback`).
@@ -232,7 +232,7 @@ const { data: lease } = await client.agents.leaseBankrKey(agentId, {
 
 **Shroud:** With an active lease, `X-Shroud-Provider: bankr` auto-resolves the leased key — no `get_secret` needed for LLM traffic.
 
-Full guide: https://docs.1claw.xyz/docs/guides/bankr-key-vending
+Full guide: https://docs.1claw.co/docs/guides/bankr-key-vending
 
 ### Store a Bankr API key (legacy static path)
 
